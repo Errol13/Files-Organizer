@@ -6,6 +6,7 @@ A Python automation tool that organizes files in a given path/directory into cat
 - Automatically sorts files by type
 - Creates folders if they don’t exist
 - Supports images, documents, audio, videos, archives
+- Dry run the files organization before proceeding
 
 ## Usage
 
