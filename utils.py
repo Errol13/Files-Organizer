@@ -25,6 +25,7 @@ def organize_files(directory):
     if not os.path.exists(directory):
         print(f"Directory '{directory}' does not exist.")
         return
+    total_files_moved = total_files(directory)
     for filename in os.listdir(directory):
         #check if it is a file
         original_path = os.path.join(directory, filename)
@@ -39,6 +40,7 @@ def organize_files(directory):
             if not os.path.exists(destination_path):
                 shutil.move(original_path, destination_path)
                 print(f"Moved '{filename}' to '{target_directory}'")
+    print(f"Total files moved: {total_files_moved}")         
 
 def count_files_by_type(directory):
     #using pathlib library here
@@ -56,6 +58,12 @@ def count_files_by_type(directory):
             file_counts[file_type] += 1
     return file_counts
 
+#total files moved
+def total_files(directory):
+    counted_files = count_files_by_type(directory)
+    total = sum(counted_files.values())
+    return total
+
 def dry_run(directory):
     """Simulates the file organization without making any changes."""
     if not os.path.exists(directory):
@@ -70,6 +78,6 @@ def dry_run(directory):
             print(f"Would move '{filename}' to '{target_directory}'")"""
     #count the files by type and display the counts
     file_counts = count_files_by_type(directory)
-    print("Total files for each category:")
+    print("Total files for each category: \n")
     for file_type, count in file_counts.items():
         print(f"{file_type}: Would move {count} files \n")
